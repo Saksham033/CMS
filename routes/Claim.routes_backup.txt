@@ -1,0 +1,7 @@
+const router = require("express").Router();
+const { createClaim, getClaims } = require("../controllers/Claim.controller");
+
+router.post("/", createClaim);
+router.get("/", getClaims);
+
+module.exports = router;
