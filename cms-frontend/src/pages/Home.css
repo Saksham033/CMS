@@ -1,14 +1,26 @@
+/* Home.css */
+
 .home-container {
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .home-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
   }
   
   .home-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    margin: 0;
   }
   
   .home-container ul {
@@ -18,9 +30,10 @@
   
   .home-container li {
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: #fff;
   }
   
   .home-container h3 {
@@ -28,7 +41,8 @@
   }
   
   .home-container p {
-    margin: 0;
+    margin: 5px 0;
+    color: #333;
   }
   
   .home-container button {
@@ -40,9 +54,20 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
   }
   
   .home-container button:hover {
     background-color: #0056b3;
+  }
+  
+  .home-container .logout-button {
+    width: auto;
+    background-color: #f44336;
+    padding: 8px 16px;
+  }
+  
+  .home-container .logout-button:hover {
+    background-color: #d32f2f;
   }
   
