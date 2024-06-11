@@ -1,5 +1,7 @@
+/* Admin.css */
+
 .admin-container {
-    max-width: 800px;
+    max-width: 600px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -12,40 +14,39 @@
   }
   
   .admin-container ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
   }
   
   .admin-container li {
     margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  
-  .admin-container p {
-    margin: 0 0 10px;
-  }
-  
-  .admin-container button {
-    margin-right: 10px;
     padding: 10px;
+  }
+  
+  .admin-container li p {
+    margin: 0;
+  }
+  
+  .admin-container li .button-container {
+    margin-top: 10px;
+  }
+  
+  .admin-container li button {
+    padding: 8px 16px;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
-  .admin-container button:hover {
+  .admin-container li button:hover {
     background-color: #0056b3;
   }
   
-  .admin-container button:last-child {
-    background-color: #dc3545;
-  }
-  
-  .admin-container button:last-child:hover {
-    background-color: #c82333;
+  .admin-container li .button-container button + button {
+    margin-left: 10px; /* Space between buttons */
   }
   

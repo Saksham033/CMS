@@ -5,34 +5,63 @@ const Admin = () => {
   const [claims, setClaims] = useState([]);
 
   useEffect(() => {
-    // Fetch pending claims here, replace with actual API call
     const fetchClaims = async () => {
-      // Placeholder data
-      const claimsData = [
-        { id: 1, details: 'Claim 1 details', status: 'Pending' },
-        { id: 2, details: 'Claim 2 details', status: 'Pending' },
-      ];
-      setClaims(claimsData);
+      try {
+        const response = await fetch('http://localhost:5000/api/claims');
+        if (!response.ok) {
+          throw new Error('Failed to fetch claims');
+        }
+        const claimsData = await response.json();
+        setClaims(claimsData);
+      } catch (error) {
+        console.error('Error:', error);
+      }
     };
     fetchClaims();
   }, []);
 
-  const handleAccept = (id) => {
-    // Placeholder for accept logic, replace with API call
-    setClaims((prevClaims) =>
-      prevClaims.map((claim) =>
-        claim.id === id ? { ...claim, status: 'Accepted' } : claim
-      )
-    );
+  const handleAccept = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/claims/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'Accepted' }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to accept claim');
+      }
+      setClaims((prevClaims) =>
+        prevClaims.map((claim) =>
+          claim._id === id ? { ...claim, status: 'Accepted' } : claim
+        )
+      );
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
-  const handleReject = (id) => {
-    // Placeholder for reject logic, replace with API call
-    setClaims((prevClaims) =>
-      prevClaims.map((claim) =>
-        claim.id === id ? { ...claim, status: 'Rejected' } : claim
-      )
-    );
+  const handleReject = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/claims/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status: 'Rejected' }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to reject claim');
+      }
+      setClaims((prevClaims) =>
+        prevClaims.map((claim) =>
+          claim._id === id ? { ...claim, status: 'Rejected' } : claim
+        )
+      );
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -40,14 +69,16 @@ const Admin = () => {
       <h2>Pending Claims</h2>
       <ul>
         {claims.map((claim) => (
-          <li key={claim.id}>
-            <p>{claim.details}</p>
+          <li key={claim._id}>
+            <p>Policy ID: {claim.policyId}</p>
+            <p>User ID: {claim.userId}</p>
+            <p>Claim Amount: {claim.claimAmount}</p>
             <p>Status: {claim.status}</p>
             {claim.status === 'Pending' && (
-              <>
-                <button onClick={() => handleAccept(claim.id)}>Accept</button>
-                <button onClick={() => handleReject(claim.id)}>Reject</button>
-              </>
+              <div className="button-container">
+                <button onClick={() => handleAccept(claim._id)}>Accept</button>
+                <button onClick={() => handleReject(claim._id)}>Reject</button>
+              </div>
             )}
           </li>
         ))}
