@@ -9,11 +9,30 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Placeholder for actual login logic, replace with API call
-    if (email === 'admin@example.com' && password === 'password') {
-      navigate('/admin');
-    } else {
-      navigate('/home');
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/users');
+      const users = await response.json();
+      
+      // Find user by email
+      const user = users.find(user => user.email === email);
+      
+      if (!user) {
+        alert('User not found. Please register or check your credentials.');
+        return;
+      }
+      
+      // Check if password matches
+      if (user.password !== password) {
+        alert('Incorrect password. Please try again.');
+        return;
+      }
+      
+      // If user exists and password matches, navigate to homepage
+      navigate('/homepage');
+      
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
