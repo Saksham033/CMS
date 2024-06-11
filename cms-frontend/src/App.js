@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import Home from './pages/Home'; // Placeholder for Home page
-import NewClaim from './pages/NewClaim'; // Placeholder for New Claim page
-import Admin from './pages/Admin'; // Placeholder for Admin page
+import Home from './pages/Home';
+import NewClaim from './pages/NewClaim';
+import Admin from './pages/Admin';
 
 const App = () => {
   return (
