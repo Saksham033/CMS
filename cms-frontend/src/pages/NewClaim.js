@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import './NewClaim.css';
 
 const NewClaim = () => {
-  const [claimDetails, setClaimDetails] = useState('');
+  const [policyId, setPolicyId] = useState('');
+  const [userId, setUserId] = useState('');
+  const [claimAmount, setClaimAmount] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -15,11 +17,15 @@ const NewClaim = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ details: claimDetails }),
+        body: JSON.stringify({
+          policyId: policyId,
+          userId: userId,
+          claimAmount: claimAmount,
+        }),
       });
 
       if (response.ok) {
-        console.log('New Claim Submitted:', claimDetails);
+        console.log('New Claim Submitted');
         navigate('/home');
       } else {
         console.error('Failed to submit claim');
@@ -36,10 +42,29 @@ const NewClaim = () => {
       <h2>Create New Claim</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Claim Details:</label>
-          <textarea
-            value={claimDetails}
-            onChange={(e) => setClaimDetails(e.target.value)}
+          <label>Policy ID:</label>
+          <input
+            type="text"
+            value={policyId}
+            onChange={(e) => setPolicyId(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>User ID:</label>
+          <input
+            type="text"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Claim Amount:</label>
+          <input
+            type="number"
+            value={claimAmount}
+            onChange={(e) => setClaimAmount(e.target.value)}
             required
           />
         </div>
