@@ -1,0 +1,51 @@
+.admin-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .admin-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .admin-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .admin-container li {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .admin-container p {
+    margin: 0 0 10px;
+  }
+  
+  .admin-container button {
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .admin-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .admin-container button:last-child {
+    background-color: #dc3545;
+  }
+  
+  .admin-container button:last-child:hover {
+    background-color: #c82333;
+  }
+  
