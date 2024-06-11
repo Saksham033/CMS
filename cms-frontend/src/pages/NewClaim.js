@@ -8,9 +8,27 @@ const NewClaim = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Placeholder for actual claim submission logic, replace with API call
-    console.log('New Claim Submitted:', claimDetails);
-    navigate('/home');
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/claims', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ details: claimDetails }),
+      });
+
+      if (response.ok) {
+        console.log('New Claim Submitted:', claimDetails);
+        navigate('/home');
+      } else {
+        console.error('Failed to submit claim');
+        // Handle error, show alert or error message to the user
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error, show alert or error message to the user
+    }
   };
 
   return (
