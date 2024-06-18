@@ -4,6 +4,7 @@ import './Home.css';
 
 const Home = () => {
   const [policies, setPolicies] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [claims, setClaims] = useState([]);
   const [filteredClaims, setFilteredClaims] = useState([]);
   const navigate = useNavigate();
