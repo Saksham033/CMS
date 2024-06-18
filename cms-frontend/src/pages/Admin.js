@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Admin.css';
 
 const Admin = () => {
   const [claims, setClaims] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClaims = async () => {
@@ -64,9 +66,16 @@ const Admin = () => {
     }
   };
 
+  const handleLogout = () => {
+    // Clear user session or token (e.g., localStorage.removeItem('token'))
+    // Navigate to the login page
+    navigate('/');
+  };
+
   return (
     <div className="admin-container">
       <h2>Pending Claims</h2>
+      <button className="logout-button" onClick={handleLogout}>Logout</button>
       <ul>
         {claims.map((claim) => (
           <li key={claim._id}>
