@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
   const [policies, setPolicies] = useState([]);
   const [claims, setClaims] = useState([]);
+  const [filteredClaims, setFilteredClaims] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const userId = location.state?.userId;
 
   useEffect(() => {
     const fetchPolicies = async () => {
@@ -29,6 +32,8 @@ const Home = () => {
         }
         const claimsData = await response.json();
         setClaims(claimsData);
+        const userClaims = claimsData.filter(claim => claim.userId === userId);
+        setFilteredClaims(userClaims);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -36,7 +41,7 @@ const Home = () => {
 
     fetchPolicies();
     fetchClaims();
-  }, []);
+  }, [userId]);
 
   const handleNewClaim = () => {
     navigate('/new-claim');
@@ -44,16 +49,6 @@ const Home = () => {
 
   const handleLogout = () => {
     navigate('/');
-  };
-
-  const getClaimStatus = (policyId) => {
-    const claim = claims.find(claim => claim.policyId === policyId);
-    return claim ? claim.status : 'No Claim';
-  };
-
-  const getUserId = (policyId) => {
-    const claim = claims.find(claim => claim.policyId === policyId);
-    return claim ? claim.userId : 'Unknown User';
   };
 
   return (
@@ -66,11 +61,22 @@ const Home = () => {
         {policies.map((policy) => (
           <li key={policy.policy_id}>
             <h3>{policy.policy_name}</h3>
-            <p>User ID: {getUserId(policy.policy_id)}</p>
-            <p>Claim Status: {getClaimStatus(policy.policy_id)}</p>
             <p>Amount: {policy.amount}</p>
             <p>Premium Amount: {policy.premium_amount}</p>
             <p>Duration: {policy.duration}</p>
+          </li>
+        ))}
+      </ul>
+      <div className="header">
+        <h2>Your Claims</h2>
+      </div>
+      <ul>
+        {filteredClaims.map((claim) => (
+          <li key={claim._id}>
+            <p>User ID: {claim.userId}</p>
+            <p>Policy ID: {claim.policyId}</p>
+            <p>Claim Status: {claim.status}</p>
+            <p>Amount: {claim.claimAmount}</p>
           </li>
         ))}
       </ul>

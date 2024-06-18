@@ -29,13 +29,13 @@ const Login = () => {
         alert('Incorrect password. Please try again.');
         return;
       }
+      const userId = user._id;
       
       // If user exists and password matches, navigate to homepage
       if(user.isAdmin){  
-        navigate('/admin');
-      }
-      else{
-        navigate('/home');
+        navigate('/admin', { state: { userId } });
+      } else {
+        navigate('/home', { state: { userId } });
       }
       
     } catch (error) {
